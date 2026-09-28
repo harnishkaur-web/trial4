@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find the Planted Errors — Swift AI Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+
+  <div class="topbar">
+    <span class="schema">AAI-E-MC1-S03-LAB01 · MC1 / 1.3 Check Before You Use</span>
+    <span class="gate-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+      Gates the unit · Element 4
+    </span>
+  </div>
+
+  <div class="tabbar" id="tabbar"></div>
+
+  <!-- PAGE 0: Brief -->
+  <div class="page active" data-page="0">
+    <div class="hero">
+      <div class="hero-kicker">Practical Lab · 1.5 hours · Timed</div>
+      <h1>Find the Planted Errors</h1>
+      <p>You'll get a short document written by an AI tool. Somewhere inside it, a handful of details have been deliberately planted wrong. Your job: find them, and say what goes wrong if nobody catches them.</p>
+    </div>
+
+    <div class="card">
+      <p class="kicker">Mission rules</p>
+      <div class="rule-grid">
+        <div class="rule-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          <b>Work against the clock</b>
+          <span>A visible timer runs while you search the document.</span>
+        </div>
+        <div class="rule-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <b>Flag, don't guess blindly</b>
+          <span>Tap only the phrases you genuinely think are wrong.</span>
+        </div>
+        <div class="rule-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 12h8M8 16h5"/></svg>
+          <b>State the consequence</b>
+          <span>Finding an error isn't enough — say what it breaks.</span>
+        </div>
+      </div>
+      <div class="never-panel">
+        <div class="never-head">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9L2.5 17a1.8 1.8 0 0 0 1.5 2.7h16a1.8 1.8 0 0 0 1.5-2.7L13.7 3.9a1.6 1.6 0 0 0-2.8 0z"/></svg>
+          Never type these into an AI tool
+        </div>
+        <div class="never-grid">
+          <div class="never-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15" r="1.4"/></svg><span>Password</span></div>
+          <div class="never-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="8" cy="12" r="2"/><path d="M13 10h5M13 14h3"/></svg><span>Aadhaar / ID</span></div>
+          <div class="never-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg><span>Phone number</span></div>
+          <div class="never-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Address</span></div>
+          <div class="never-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 8.6c0 5-8.8 11-8.8 11S3.2 13.6 3.2 8.6a4.8 4.8 0 0 1 8.8-2.7 4.8 4.8 0 0 1 8.8 2.7z"/></svg><span>Health info</span></div>
+          <div class="never-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><span>Marks / grades</span></div>
+        </div>
+        <p class="never-sub">Everything in this lab's document is fictional. Keep it that way in your own answers too.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 1: Why this matters -->
+  <div class="page" data-page="1">
+    <div class="card">
+      <p class="kicker">Real life check</p>
+      <h2>Why this small habit matters</h2>
+      <p>This isn't just an exercise. The same mistakes show up in real work and real classrooms — and they're easy to miss if you're in a hurry.</p>
+      <div class="stakes-grid">
+        <div class="stakes-card">
+          <div class="sicon" style="background:var(--royal);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></div>
+          <b>At work</b>
+          <span>A wrong figure in a note can mean the wrong stock gets ordered, or a client gets told the wrong thing.</span>
+        </div>
+        <div class="stakes-card">
+          <div class="sicon" style="background:var(--teal);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+          <b>In your studies</b>
+          <span>A wrong date or name in an assignment can cost marks, even when the main idea was right.</span>
+        </div>
+        <div class="stakes-card">
+          <div class="sicon" style="background:var(--coral);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.9 3.1-6 7-6s7 2.1 7 6"/></svg></div>
+          <b>Your name on it</b>
+          <span>Once you send or submit something, it's yours — even if the AI wrote the wrong part. People remember careless work.</span>
+        </div>
+      </div>
+      <div class="gate-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+        <span>This is exactly why this lab is a <b>mandatory, gated step</b> in the course — it has to be practised properly before you move on, not just read about.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 2: How it works -->
+  <div class="page" data-page="2">
+    <div class="card">
+      <p class="kicker">Before you start</p>
+      <h2>What you're hunting for</h2>
+      <p>The same five categories from the Marking Card. A planted error can hide in any of them.</p>
+      <div class="check-grid">
+        <div class="check-chip" style="background:var(--royal);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg><span>Facts</span></div>
+        <div class="check-chip" style="background:var(--teal);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V10M10 19V5M16 19v-7M22 19H2"/></svg><span>Figures</span></div>
+        <div class="check-chip" style="background:var(--purple);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg><span>Dates</span></div>
+        <div class="check-chip" style="background:var(--coral);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.9 3.1-6 7-6s7 2.1 7 6"/></svg><span>Names</span></div>
+        <div class="check-chip" style="background:var(--gold);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg><span>Sources</span></div>
+      </div>
+
+      <p class="kicker" style="margin-top:6px;">Pick your case file</p>
+      <div class="lane-row">
+        <label for="laneSelect">Document setting:</label>
+        <select class="lane-select" id="laneSelect" onchange="switchLane()">
+          <option value="iti">ITI · Workshop equipment note</option>
+          <option value="higher">Higher education · Campus event report</option>
+        </select>
+      </div>
+      <p>Five details in this note have been planted wrong. A few others are correct on purpose — don't flag those.</p>
+    </div>
+  </div>
+
+  <!-- PAGE 3: Investigate -->
+  <div class="page" data-page="3">
+    <div class="card">
+      <p class="kicker">Investigate</p>
+      <h2>Tap every phrase you think is wrong</h2>
+
+      <div class="timer-row">
+        <div class="timer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          <span id="timerDisplay">05:00</span>
+        </div>
+        <button class="timer-btn" onclick="toggleTimer()" id="timerBtn">Start timer</button>
+        <span class="flag-count">Flagged: <b id="flagCount">0</b></span>
+      </div>
+
+      <div class="doc-frame">
+        <div class="doc-title" id="docTitle">Workshop Equipment Note</div>
+        <div class="doc-text" id="docText"></div>
+      </div>
+
+      <button class="submit-btn" onclick="submitFindings()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        Submit my findings
+      </button>
+    </div>
+  </div>
+
+  <!-- PAGE 4: Findings -->
+  <div class="page" data-page="4">
+    <div class="card">
+      <p class="kicker">Results</p>
+      <h2>What you found</h2>
+      <div class="score-hero">
+        <div class="score-ring" id="scoreRing"><div class="score-ring-inner" id="scoreRingText">0/5</div></div>
+        <div>
+          <p style="margin:0;font-weight:700;font-size:14.5px;" id="scoreHeadline">Submit your findings on the previous page first.</p>
+          <p style="margin:0;font-size:12.5px;color:#6670A3;">Planted errors found · false flags · missed errors, all shown below.</p>
+        </div>
+      </div>
+      <div id="findingsList"></div>
+    </div>
+  </div>
+
+  <!-- PAGE 5: Consequences -->
+  <div class="page" data-page="5">
+    <div class="card">
+      <p class="kicker">State the consequence</p>
+      <h2>For each planted error, what does it break?</h2>
+      <p>Finding the error is half the task. Choose the real-world consequence for each one.</p>
+      <div id="cqList"></div>
+      <button class="submit-btn" onclick="checkConsequences()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        Check my consequences
+      </button>
+    </div>
+  </div>
+
+  <!-- PAGE 6: Gate result -->
+  <div class="page" data-page="6">
+    <div class="card">
+      <p class="kicker">Case closed</p>
+      <div class="gate-result" id="gateResult">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        <h2 id="gateHeadline">Complete the investigation and consequence pages first</h2>
+        <p id="gateSub">Your combined result will appear here.</p>
+      </div>
+
+      <div class="recap-grid">
+        <div class="recap-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>Find</span></div>
+        <div class="recap-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v18M18 3v18M3 9h18M3 15h18"/></svg><span>Sort</span></div>
+        <div class="recap-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 12h8M8 16h5"/></svg><span>State why</span></div>
+        <div class="recap-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg><span>Correct</span></div>
+        <div class="recap-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span>Clear gate</span></div>
+      </div>
+
+      <div class="transfer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        <p><strong>Try it now.</strong> Before you use any AI-drafted note again, run this same search on it — marking, flagging and stating the consequence, not just skimming for tone.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-row">
+    <button class="nav-btn" id="backBtn" onclick="changePage(-1)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      Back
+    </button>
+    <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8892C2;" id="pageCount">1 / 7</span>
+    <button class="nav-btn primary" id="nextBtn" onclick="changePage(1)">
+      Next
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+  </div>
+
+  <footer>
+    <span>Swift AI Academy</span>
+    <span>PC 4.1–4.5 · PC 5.1–5.4 · English</span>
+  </footer>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
